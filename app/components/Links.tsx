@@ -25,6 +25,7 @@ export const LinkManager = () => {
     return (
       <div>
         <Links connectedWallet={user.wallet.address} />
+        <CreateUser connectedWallet={user.wallet.address} />
         <CreateLink connectedWallet={user.wallet.address} />
       </div>
     );
@@ -103,6 +104,37 @@ export const CreateLink = (props: { connectedWallet: string }) => {
         <input type="text" placeholder="Image" />
         <input type="text" placeholder="Owner" />
         <button type="submit">Create Link</button>
+      </form>
+    </div>
+  );
+};
+
+export const CreateUser = (props: { connectedWallet: string }) => {
+  const queryClient = useQueryClient();
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const name = "TODO";
+    const wallet = props.connectedWallet;
+    const image = "TODO";
+
+    const res = await fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify({ name, wallet, image }),
+    }).then((res) => res.json());
+    console.log(res);
+
+    await queryClient.invalidateQueries();
+  };
+
+  return (
+    <div>
+      <h1>Create User</h1>
+      <form onSubmit={onSubmit}>
+        <input type="text" placeholder="Name" />
+        <input type="text" placeholder="Wallet" />
+        <input type="text" placeholder="Image" />
+        <button type="submit">Create User</button>
       </form>
     </div>
   );
