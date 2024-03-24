@@ -60,6 +60,7 @@ export const Links = (props: { connectedWallet?: string; name?: string }) => {
     },
   });
 
+  console.log("links.data", links.data?.res.links);
   return (
     <div>
       <h1>Links</h1>
@@ -81,13 +82,11 @@ export const CreateLink = (props: { connectedWallet: string }) => {
     e.preventDefault();
     const url = "TODO";
     const title = "TODO";
-    const description = "TODO";
-    const image = "TODO";
-    const owner = props.connectedWallet;
+    const user = props.connectedWallet;
 
     const res = await fetch("/api/link", {
       method: "POST",
-      body: JSON.stringify({ url, title, description, image, owner }),
+      body: JSON.stringify({ url, title, user }),
     }).then((res) => res.json());
     console.log(res);
 
@@ -115,12 +114,12 @@ export const CreateUser = (props: { connectedWallet: string }) => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = "TODO";
-    const wallet = props.connectedWallet;
     const image = "TODO";
+    const wallet = props.connectedWallet;
 
     const res = await fetch("/api/user", {
       method: "POST",
-      body: JSON.stringify({ name, wallet, image }),
+      body: JSON.stringify({ name, image, wallet }),
     }).then((res) => res.json());
     console.log(res);
 

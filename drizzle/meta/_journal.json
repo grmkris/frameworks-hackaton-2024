@@ -8,6 +8,13 @@
       "when": 1711250380065,
       "tag": "0000_fine_chronomancer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1711251165840,
+      "tag": "0001_glamorous_wrecking_crew",
+      "breakpoints": true
     }
   ]
 }

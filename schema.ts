@@ -4,7 +4,7 @@ import { pgTable, serial, text, uuid } from "drizzle-orm/pg-core";
 export const UserTable = pgTable("users", {
   id: uuid("id").primaryKey(),
   name: text("name").notNull(),
-  wallet: text("wallet").notNull(),
+  wallet: text("wallet").notNull().unique(),
   image: text("image"),
 });
 

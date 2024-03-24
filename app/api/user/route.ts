@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (name) {
-    const res = await db.query.UserTable.findMany({
+    const res = await db.query.UserTable.findFirst({
       where: eq(UserTable.name, name),
       with: {
         links: true,
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (wallet) {
-    const res = await db.query.UserTable.findMany({
+    const res = await db.query.UserTable.findFirst({
       where: eq(UserTable.wallet, wallet),
       with: {
         links: true,
