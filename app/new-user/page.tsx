@@ -1,9 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { usePrivy } from "@privy-io/react-auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaSave } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 import { Link, User } from "../../schema";
 import { UserProfile } from "../components/UserProfile";
@@ -22,23 +23,37 @@ export type UserForm = {
 };
 
 const NewUserPage = () => {
+  const { toast } = useToast();
   const { useGetUser } = useUser();
+  const { user } = usePrivy();
   const form = useForm<UserForm>();
 
   const onSubmit: SubmitHandler<UserForm> = (data) => {
-    console.log(data);
+    if (!user?.wallet?.address) {
+      toast({
+        title: "Not wallet provided",
+      });
+      return;
+    }
+
     try {
       fetch("/api/user", {
         method: "POST",
         body: JSON.stringify({
           ...data,
-          wallet: "0x899c5d6022725b02a39957Be50F08213eB2B0d75",
+          wallet: user?.wallet?.address,
         }),
       }).then((res) => res.json());
     } catch (e) {
-      toast("Error saving user", { type: "error" });
+      toast({
+        title: `Something were wrong trying to create the user: ${e}`,
+      });
     }
   };
+
+  const userData = useGetUser({
+    wallet: user?.wallet?.address,
+  });
 
   // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
@@ -64,7 +79,7 @@ const NewUserPage = () => {
         <UserProfile
           isEditing
           user={{
-            nickname: "exampe",
+            nickname: user?.farcaster?.username ?? userData.data?.name,
           }}
           form={form}
         />
