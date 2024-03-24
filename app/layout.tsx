@@ -3,7 +3,8 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query'
 import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css';
+import {PrivyProvider} from "@privy-io/react-auth";
 import {Privy} from "./components/Privy";
 import React from "react";
 import {TanstackQueryProvider} from "./components/TanstackQueryProvider";
