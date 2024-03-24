@@ -10,16 +10,21 @@
     "start": "next start",
     "lint": "next lint",
     "update-debugger": "npx degit github:framesjs/frames.js/examples/framesjs-starter/app/debug#main app/debug --force",
-    "update-framesjs": "yarn upgrade frames.js@latest && yarn run update-debugger"
+    "update-framesjs": "yarn upgrade frames.js@latest && yarn run update-debugger",
+    "generate-migration": "yarn drizzle-kit generate:pg",
+    "db:migrate": "tsx ./migrate.ts"
   },
   "dependencies": {
     "@farcaster/core": "^0.14.3",
+    "@neondatabase/serverless": "^0.9.0",
     "@noble/ed25519": "^2.0.0",
     "@privy-io/react-auth": "^1.59.5",
+    "@tanstack/react-query": "^5.28.6",
     "@vercel/kv": "^1.0.1",
     "@xmtp/frames-validator": "^0.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "drizzle-orm": "^0.30.4",
     "frames.js": "^0.9.3",
     "lucide-react": "^0.331.0",
     "next": "^14.1.0",
@@ -38,10 +43,12 @@
     "autoprefixer": "^10.0.1",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
 }

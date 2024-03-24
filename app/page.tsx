@@ -13,6 +13,7 @@ import Link from "next/link";
 import { DEFAULT_DEBUGGER_HUB_URL, createDebugUrl } from "./debug";
 import { currentURL } from "./utils";
 import {ConnectWallet} from "./components/ConnectWallet";
+import {LinkManager} from "./components/Links";
 
 type State = {
   active: string;
@@ -67,7 +68,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
         other examples
       </Link>
       <ConnectWallet />
-
+      <LinkManager />
       <FrameContainer
         postUrl="/frames"
         pathname="/"

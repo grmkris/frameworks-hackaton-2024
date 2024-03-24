@@ -1,7 +1,9 @@
-
+import {
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query'
 import type { Metadata } from "next";
 import "./globals.css";
-import {PrivyProvider} from "@privy-io/react-auth";
 import {Privy} from "./components/Privy";
 
 export const metadata: Metadata = {
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
   title: "frames.js starter",
   description: "...",
 };
-
+const queryClient = new QueryClient()
 export default function RootLayout({
   children,
 }: {
@@ -18,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <QueryClientProvider client={queryClient}>
       <Privy>
         {children}
       </Privy>
+          </QueryClientProvider>
       </body>
     </html>
   );
