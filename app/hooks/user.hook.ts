@@ -1,7 +1,6 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast, useToast } from "react-toastify";
 
 import { User } from "../../schema";
 import { UserForm } from "../new-user/page";

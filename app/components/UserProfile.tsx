@@ -15,14 +15,14 @@ export const UserProfile = ({
   user?: UserType;
   isEditing?: boolean;
   onEdit?: () => void;
-  form: any;
+  form?: any;
 }) => {
   const [name, setName] = useState(user?.nickname);
 
   return (
     <div className="mt-16 w-full flex flex-col justify-center items-center gap-6">
       <Image
-        src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
+        src={user?.image ?? "/racccoon.jpeg"}
         className="w-32 rounded-full"
         alt="Avatar"
         width={128}
@@ -38,6 +38,7 @@ export const UserProfile = ({
           <p className="text-xl">@</p>
           <Input
             value={name}
+            defaultValue={"YourNickname"}
             className="max-w-40 p-2 border-b border-transparent border-b-gray-500 rounded-none text-xl text-black"
             onChange={(e) => {
               setName(e.target.value);

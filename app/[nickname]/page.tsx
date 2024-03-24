@@ -19,6 +19,7 @@ import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../debug";
 
 export type UserType = {
   nickname: string;
+  image?: string;
 };
 
 const mockLinkData: CustomLinkProps[] = [
