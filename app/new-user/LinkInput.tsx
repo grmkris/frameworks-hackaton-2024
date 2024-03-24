@@ -11,12 +11,14 @@ export const LinkInput = () => {
   const [linksData, setLinksData] = useState([]);
 
   const handleAddInput = () => {
+    if (inputLength >= 5) return;
     setInputLength(inputLength + 1);
   };
 
   const handleRemoveInput = (index: number) => {
     setInputLength(inputLength - 1);
     const newLinksData = linksData.filter((_, i) => i !== index);
+    setLinksData(newLinksData);
   };
 
   return (
@@ -42,13 +44,12 @@ export const LinkInput = () => {
         </div>
       ))}
 
-      <Button
-        onClick={handleAddInput}
-        className="flex flex-row gap-1 bg-gray-700 p-2 rounded-md px-8"
-      >
-        <MdAdd color="#ffffff" />
-        <p className="text-white">Add Link</p>
-      </Button>
+      {inputLength < 5 && (
+        <Button onClick={handleAddInput} className="w-[250px] p-2 rounded-sm">
+          <MdAdd />
+          Add Link
+        </Button>
+      )}
     </>
   );
 };
