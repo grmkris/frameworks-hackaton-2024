@@ -54,19 +54,44 @@ export async function GET(request: NextRequest) {
  * @constructor
  */
 export async function POST(request: NextRequest) {
-  const body = (await request.json()) as Omit<User, "id" | "links">;
-  const { name, wallet, image } = body;
-  const res = await db
-    .insert(UserTable)
-    .values({
-      name,
-      image,
-      wallet,
-      id: crypto.randomUUID(),
-    })
-    .execute();
+  const body = (await request.json()) as Omit<User, "id">;
+  const { name, wallet, image, links } = body;
 
-  return Response.json({ res });
+  // check if user exists
+  let existingUser = await db.query.UserTable.findFirst({
+    where: eq(UserTable.wallet, wallet),
+  });
+
+  if (!existingUser) {
+    const res = await db
+      .insert(UserTable)
+      .values({
+        name,
+        image,
+        wallet,
+        id: crypto.randomUUID(),
+      })
+      .returning()
+      .execute();
+    existingUser = res[0];
+  }
+
+  // add links
+
+  if (!existingUser?.id) throw Error("No user");
+
+  const promisers = links?.map(async (x) => {
+    return db.insert(LinksTable).values({
+      ...x,
+      id: crypto.randomUUID(),
+      user: existingUser?.id,
+    });
+  });
+
+  // @ts-ignore
+  await Promise.all(promisers);
+
+  return Response.json({ msg: "OK" });
 }
 
 export async function DELETE(request: NextRequest) {
