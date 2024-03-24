@@ -129,17 +129,34 @@ export default async function UserDetail({
               style={{
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "0.6rem",
+                width: "100%",
+                height: "100%",
               }}
             >
               {userData?.image && (
                 <img
                   alt="Vercel"
-                  height={200}
+                  height={300}
                   src={userData?.image ?? "https://picsum.photos/200/300"}
-                  width={400}
+                  width={300}
+                  style={{
+                    borderRadius: "100%",
+                  }}
                 />
               )}
-              This is {search}'s page.
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "#4d4f50",
+                  fontSize: "2.5rem",
+                  fontWeight: "300",
+                }}
+              >
+                Welcome to {search}'s page ✨!
+              </p>
             </div>
           )}
         </FrameImage>
