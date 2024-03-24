@@ -9,6 +9,8 @@ import {
   getPreviousFrame,
   useFramesReducer,
 } from "frames.js/next/server";
+import { IoUnlink } from "react-icons/io5";
+import QRCode from "react-qr-code";
 
 import { UserTable } from "../../schema";
 import { db } from "../api/user/route";
@@ -132,7 +134,7 @@ export default async function UserDetail({
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "0.6rem",
+                gap: "64px",
                 width: "100%",
                 height: "100%",
               }}
@@ -148,17 +150,36 @@ export default async function UserDetail({
                   }}
                 />
               )}
-              <p
+              <div
                 style={{
-                  textAlign: "center",
-                  color: "#4d4f50",
-                  fontSize: "2.5rem",
-                  fontWeight: "300",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "36px",
                 }}
               >
-                Welcome to {search}'s page ✨!
-                {userData?.wallet && userData?.wallet}
-              </p>
+                <p
+                  style={{
+                    textAlign: "center",
+                    color: "#4d4f50",
+                    fontSize: "2.5rem",
+                    fontWeight: "300",
+                  }}
+                >
+                  Welcome to {search}'s page ✨!
+                </p>
+                <p
+                  style={{
+                    textAlign: "center",
+                    color: "#949a9d",
+                    fontSize: "1.5rem",
+                    fontWeight: "300",
+                  }}
+                >
+                  {userData?.wallet && userData?.wallet}
+                </p>
+              </div>
             </div>
           )}
         </FrameImage>
