@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FrameButton, FrameContainer, FrameImage } from "frames.js/next/server";
+import {
+  FrameButton,
+  FrameContainer,
+  FrameImage,
+  FrameReducer,
+  getFrameMessage,
+  getPreviousFrame,
+  useFramesReducer,
+} from "frames.js/next/server";
 
 import CustomLink, { CustomLinkProps } from "../components/CustomLink";
 import Footer from "../components/Footer";
@@ -39,9 +47,35 @@ const mockLinkData: CustomLinkProps[] = [
   },
 ];
 
-export default function UserDetail() {
+const state = {};
+
+type State = {};
+
+const initialState: State = {};
+
+const reducer: FrameReducer<State> = (state, action) => {
+  return {};
+};
+
+export default async function UserDetail() {
   const searchParams = useSearchParams();
   const search = searchParams?.get("nickname") ?? "";
+
+  const previousFrame = getPreviousFrame(search);
+
+  const frameMessage = await getFrameMessage(previousFrame.postBody, {
+    hubHttpUrl: DEFAULT_DEBUGGER_HUB_URL,
+  });
+
+  if (frameMessage && !frameMessage?.isValid) {
+    throw new Error("Invalid frame payload");
+  }
+
+  const [state, dispatch] = useFramesReducer<State>(
+    reducer,
+    initialState,
+    previousFrame,
+  );
 
   return (
     <div className="min-h-screen flex flex-col justify-start items-center relative">
@@ -58,7 +92,7 @@ export default function UserDetail() {
       <Footer />
       <Link href={createDebugUrl("/[nickname]/page")}>Debug</Link>
       <FrameContainer
-        pathname={`/${searchParams.nickname}`}
+        pathname={`/${search}`}
         postUrl="/frames"
         state={state}
         previousFrame={previousFrame}
