@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { eq } from "drizzle-orm";
 import {
   FrameButton,
   FrameContainer,
@@ -10,6 +10,8 @@ import {
   useFramesReducer,
 } from "frames.js/next/server";
 
+import { UserTable } from "../../schema";
+import { db } from "../api/user/route";
 import CustomLink, { CustomLinkProps } from "../components/CustomLink";
 import Footer from "../components/Footer";
 import { UserProfile } from "../components/UserProfile";
@@ -63,6 +65,7 @@ export default async function UserDetail({
 }) {
   const search = params.nickname;
 
+  // @ts-ignore
   const previousFrame = getPreviousFrame(search);
 
   const frameMessage = await getFrameMessage(previousFrame.postBody, {
@@ -76,9 +79,24 @@ export default async function UserDetail({
   const [state, dispatch] = useFramesReducer<State>(
     reducer,
     initialState,
+    // @ts-ignore
     previousFrame,
   );
 
+  const userData = await db.query.UserTable.findFirst({
+    where: eq(UserTable.name, search),
+    with: {
+      links: true,
+    },
+  });
+  console.log("userData", userData);
+  const buttons = userData?.links.map((link) => (
+    <FrameButton key={link.title} action={"link"} target={link.url}>
+      {link.title}
+    </FrameButton>
+  ));
+
+  // @ts-ignore
   return (
     <div className="min-h-screen flex flex-col justify-start items-center relative">
       <UserProfile
@@ -121,28 +139,20 @@ export default async function UserDetail({
                 flexDirection: "column",
               }}
             >
-              <img
-                alt="Vercel"
-                height={400}
-                src="https://picsum.photos/200/300"
-                width={600}
-              />
-              This is a user profile page of {search}
+              {userData?.image && (
+                <img
+                  alt="Vercel"
+                  height={200}
+                  src={userData?.image ?? "https://picsum.photos/200/300"}
+                  width={400}
+                />
+              )}
+              This is {search}'s page.
             </div>
           )}
         </FrameImage>
-        <FrameButton action={"link"} target={"/"}>
-          Twitter
-        </FrameButton>
-        <FrameButton action={"link"} target={"/"}>
-          Facebook
-        </FrameButton>
-        <FrameButton action={"link"} target={"/"}>
-          Instagram
-        </FrameButton>
-        <FrameButton action={"link"} target={"/"}>
-          LinkedIn
-        </FrameButton>
+
+        {buttons}
       </FrameContainer>
     </div>
   );

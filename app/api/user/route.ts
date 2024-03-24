@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     where: eq(UserTable.wallet, wallet),
   });
 
-  if (!existingUser) {
+  if (!existingUser?.name) {
     const res = await db
       .insert(UserTable)
       .values({
