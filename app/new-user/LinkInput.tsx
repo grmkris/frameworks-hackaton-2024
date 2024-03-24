@@ -45,9 +45,12 @@ export const LinkInput = () => {
       ))}
 
       {inputLength < 5 && (
-        <Button onClick={handleAddInput} className="w-[250px] p-2 rounded-sm">
-          <MdAdd />
-          Add Link
+        <Button
+          onClick={handleAddInput}
+          className="flex flex-row gap-1 items-center justify-center w-[250px] p-2 rounded-sm bg-gray-800 px-8"
+        >
+          <MdAdd color="#ffffff" />
+          <p className="text-white">Add Link</p>
         </Button>
       )}
     </>
