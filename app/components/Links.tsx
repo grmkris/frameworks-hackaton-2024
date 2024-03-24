@@ -49,6 +49,16 @@ export const Links = (props: { connectedWallet?: string; name?: string }) => {
       );
     },
   });
+
+  const linksByName = useQuery<{
+    res: User;
+  }>({
+    queryKey: ["links", props.name],
+    queryFn: async () => {
+      return fetch(`/api/user?name=${props.name}`).then((res) => res.json());
+    },
+  });
+
   return (
     <div>
       <h1>Links</h1>
