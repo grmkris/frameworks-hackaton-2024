@@ -51,7 +51,7 @@ export const LinkInput = ({ form }: { form: any }) => {
               ]);
             }}
           />
-          <Input  
+          <Input
             value={linksData[i]?.url ?? ""}
             type="text"
             placeholder="URL"
@@ -84,7 +84,10 @@ export const LinkInput = ({ form }: { form: any }) => {
 
       {inputLength < MAX_NUMBER_OF_LINKS && (
         <Button
-          onClick={handleAddInput}
+          onClick={(e) => {
+            e.preventDefault();
+            handleAddInput();
+          }}
           className="flex flex-row gap-1 items-center justify-center w-[2MAX_NUMBER_OF_LINKS0px] p-2 rounded-sm bg-gray-800 px-8"
         >
           <MdAdd color="#ffffff" />

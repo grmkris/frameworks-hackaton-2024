@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { Link as LinkSchema } from "../../schema";
 import LinkIcon from "./LinkIcon";
 
 export type LinkType =
@@ -8,24 +10,25 @@ export type LinkType =
   | "linkedin"
   | "github";
 
-export type CustomLinkProps = {
-  name: string;
-  type?: LinkType;
-};
-
-const CustomLink = ({ link }: { link: CustomLinkProps }) => {
+const CustomLink = ({
+  link,
+  linkType,
+}: {
+  link: LinkSchema;
+  linkType?: LinkType;
+}) => {
   return (
     <Link
       className="relative flex flex-row gap-2 items-center bg-emerald-100 border border-emerald-500 rounded-3xl p-4 min-w-96 justify-center"
-      href="https://www.google.com/"
+      href={link.url}
       rel="noreferrer"
       target="_blank"
       id="btn__zuri"
     >
       <div className="absolute max-w-8 left-4">
-        <LinkIcon type={link.type} />
+        <LinkIcon type={linkType} />
       </div>
-      <p>{link.name}</p>
+      <p>{link.title}</p>
     </Link>
   );
 };
