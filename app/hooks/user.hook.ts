@@ -1,9 +1,10 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, useToast } from "react-toastify";
 
 import { User } from "../../schema";
+import { UserForm } from "../new-user/page";
 
 export const useUser = () => {
   const useGetUser = ({ name, wallet }: { name?: string; wallet?: string }) => {
@@ -17,20 +18,6 @@ export const useUser = () => {
     });
   };
 
-  // const useRegisterUser = () => {
-  //     useMutation({
-  //         mutationFn: () => {
-  //             return fetch('/api/user', {
-  //                 method: 'POST',
-  //                 body: JSON.stringify({ name, wallet, image }),
-  //             }).then(res => res.json())
-  //         },
-  //         onSuccess: () => {
-  //           // Invalidate and refetch
-
-  //         },
-  //       })
-  // }
 
   return {
     useGetUser,
