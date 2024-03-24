@@ -9,9 +9,10 @@ import { MdAdd, MdDelete } from "react-icons/md";
 export const LinkInput = () => {
   const [inputLength, setInputLength] = useState(1);
   const [linksData, setLinksData] = useState([]);
+  const MAX_NUMBER_OF_LINKS = 4;
 
   const handleAddInput = () => {
-    if (inputLength >= 5) return;
+    if (inputLength >= MAX_NUMBER_OF_LINKS) return;
     setInputLength(inputLength + 1);
   };
 
@@ -29,25 +30,26 @@ export const LinkInput = () => {
           <Input
             type="text"
             placeholder="Title"
-            className="w-[250px] p-2 rounded-sm"
+            className="w-[2MAX_NUMBER_OF_LINKS0px] p-2 rounded-sm"
           />
           <Input
             type="text"
             placeholder="URL"
-            className="w-[250px] p-2 rounded-sm"
+            className="w-[2MAX_NUMBER_OF_LINKS0px] p-2 rounded-sm"
           />
           <MdDelete
             onClick={() => {
               handleRemoveInput(i);
             }}
+            className="cursor-pointer"
           />
         </div>
       ))}
 
-      {inputLength < 5 && (
+      {inputLength < MAX_NUMBER_OF_LINKS && (
         <Button
           onClick={handleAddInput}
-          className="flex flex-row gap-1 items-center justify-center w-[250px] p-2 rounded-sm bg-gray-800 px-8"
+          className="flex flex-row gap-1 items-center justify-center w-[2MAX_NUMBER_OF_LINKS0px] p-2 rounded-sm bg-gray-800 px-8"
         >
           <MdAdd color="#ffffff" />
           <p className="text-white">Add Link</p>
