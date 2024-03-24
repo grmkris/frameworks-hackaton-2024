@@ -22,6 +22,7 @@ import { UserProfileScreen } from "../screens/UserProfile";
 export type UserType = {
   nickname: string;
   image?: string | null;
+  wallet: string;
 };
 
 const mockLinkData: CustomLinkProps[] = [
@@ -156,6 +157,7 @@ export default async function UserDetail({
                 }}
               >
                 Welcome to {search}'s page ✨!
+                {userData?.wallet && userData?.wallet}
               </p>
             </div>
           )}

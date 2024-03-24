@@ -105,6 +105,7 @@ const NewUserPage = () => {
               user={{
                 nickname: user?.farcaster?.displayName ?? userData.data?.name,
                 image: user?.farcaster?.pfp,
+                wallet: user?.wallet?.address,
               }}
               form={form}
             />

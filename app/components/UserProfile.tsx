@@ -28,6 +28,10 @@ export const UserProfile = ({
         width={128}
         height={128}
       />
+      <div className="flex flex-col gap-1 items-center justify-center">
+        <p className="text-md text-gray-500">Wallet:</p>
+        <p className="text-xs text-gray-500">{user?.wallet}</p>
+      </div>
       {!isEditing && (
         <p className="font-bold text-zuriGray-900 text-xl ">
           @{user?.nickname}
