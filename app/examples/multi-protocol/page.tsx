@@ -1,16 +1,17 @@
+import Link from "next/link";
 import { ClientProtocolId } from "frames.js";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
-  NextServerPageProps,
   getFrameMessage,
   getPreviousFrame,
+  NextServerPageProps,
 } from "frames.js/next/server";
 import { getXmtpFrameMessage, isXmtpFrameActionPayload } from "frames.js/xmtp";
+
+import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../../debug";
 import { currentURL } from "../../utils";
-import { DEFAULT_DEBUGGER_HUB_URL, createDebugUrl } from "../../debug";
-import Link from "next/link";
 
 const acceptedProtocols: ClientProtocolId[] = [
   {

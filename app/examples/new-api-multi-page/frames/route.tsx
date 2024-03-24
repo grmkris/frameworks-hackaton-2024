@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { createFrames, Button } from "frames.js/next";
+import { Button, createFrames } from "frames.js/next";
 
 const totalPages = 5;
 

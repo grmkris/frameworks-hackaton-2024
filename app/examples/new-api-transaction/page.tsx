@@ -1,8 +1,9 @@
-import Link from "next/link";
-import { currentURL, vercelURL } from "../../utils";
-import { createDebugUrl } from "../../debug";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { fetchMetadata } from "frames.js/next";
+
+import { createDebugUrl } from "../../debug";
+import { currentURL, vercelURL } from "../../utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -12,8 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(await fetchMetadata(
         new URL(
           "/examples/new-api-transaction/frames",
-          vercelURL() || "http://localhost:3000"
-        )
+          vercelURL() || "http://localhost:3000",
+        ),
       )),
     },
   };

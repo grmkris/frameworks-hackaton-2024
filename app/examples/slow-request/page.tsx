@@ -1,16 +1,17 @@
+import Link from "next/link";
 import { kv } from "@vercel/kv";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
-  NextServerPageProps,
   getFrameMessage,
   getPreviousFrame,
+  NextServerPageProps,
 } from "frames.js/next/server";
-import Link from "next/link";
-import { RandomNumberRequestStateValue } from "./slow-fetch/types";
+
+import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../../debug";
 import { currentURL } from "../../utils";
-import { DEFAULT_DEBUGGER_HUB_URL, createDebugUrl } from "../../debug";
+import { RandomNumberRequestStateValue } from "./slow-fetch/types";
 
 type State = {};
 
@@ -139,14 +140,14 @@ export default async function Home({ searchParams }: NextServerPageProps) {
           timestamp: new Date().getTime(),
         },
         // set as pending for one minute
-        { ex: 60 }
+        { ex: 60 },
       );
 
       // start request, don't await it! Return a loading page, let this run in the background
       fetch(
         new URL(
           "/examples/slow-request/slow-fetch",
-          process.env.NEXT_PUBLIC_HOST
+          process.env.NEXT_PUBLIC_HOST,
         ).toString(),
         {
           method: "POST",
@@ -156,7 +157,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
           body: JSON.stringify({
             postBody: JSON.parse(searchParams?.postBody as string),
           }),
-        }
+        },
       );
 
       frame = checkStatusFrame;

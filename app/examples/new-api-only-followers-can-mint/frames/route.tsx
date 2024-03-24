@@ -3,6 +3,7 @@ import { getTokenUrl } from "frames.js";
 import { farcasterHubContext } from "frames.js/middleware";
 import { Button, createFrames } from "frames.js/next";
 import { zora } from "viem/chains";
+
 import { DEFAULT_DEBUGGER_HUB_URL } from "../../../debug";
 
 const frames = createFrames({

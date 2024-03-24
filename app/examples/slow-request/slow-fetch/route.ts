@@ -1,8 +1,9 @@
-import { getFrameMessage } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
-import { RandomNumberRequestStateValue } from "./types";
+import { getFrameMessage } from "frames.js";
+
 import { DEFAULT_DEBUGGER_HUB_URL } from "../../../debug";
+import { RandomNumberRequestStateValue } from "./types";
 
 const MAXIMUM_KV_RESULT_LIFETIME_IN_SECONDS = 2 * 60; // 2 minutes
 
@@ -29,7 +30,7 @@ export async function POST(req: NextRequest) {
         status: "success",
         timestamp: new Date().getTime(),
       },
-      { ex: MAXIMUM_KV_RESULT_LIFETIME_IN_SECONDS }
+      { ex: MAXIMUM_KV_RESULT_LIFETIME_IN_SECONDS },
     );
 
     return NextResponse.json({
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
         status: "error",
         timestamp: new Date().getTime(),
       },
-      { ex: MAXIMUM_KV_RESULT_LIFETIME_IN_SECONDS }
+      { ex: MAXIMUM_KV_RESULT_LIFETIME_IN_SECONDS },
     );
     // Handle errors
     return NextResponse.json({ message: e }, { status: 500 });

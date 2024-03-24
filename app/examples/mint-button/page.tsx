@@ -1,17 +1,18 @@
+import Link from "next/link";
 import { getTokenUrl } from "frames.js";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
   FrameReducer,
-  NextServerPageProps,
   getPreviousFrame,
+  NextServerPageProps,
   useFramesReducer,
 } from "frames.js/next/server";
-import Link from "next/link";
 import { zora } from "viem/chains";
-import { currentURL } from "../../utils";
+
 import { createDebugUrl } from "../../debug";
+import { currentURL } from "../../utils";
 
 type State = {
   pageIndex: number;

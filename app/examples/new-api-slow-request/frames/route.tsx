@@ -1,6 +1,7 @@
 import { kv } from "@vercel/kv";
 import { types } from "frames.js/core";
-import { createFrames, Button } from "frames.js/next";
+import { Button, createFrames } from "frames.js/next";
+
 import { RandomNumberRequestStateValue } from "../slow-fetch/types";
 
 const frames = createFrames({
@@ -100,14 +101,14 @@ const handleRequest = frames(async (ctx) => {
         timestamp: new Date().getTime(),
       },
       // set as pending for one minute
-      { ex: 60 }
+      { ex: 60 },
     );
 
     // start request, don't await it! Return a loading page, let this run in the background
     fetch(
       new URL(
         "/examples/new-api-slow-request/slow-fetch",
-        process.env.NEXT_PUBLIC_HOST
+        process.env.NEXT_PUBLIC_HOST,
       ).toString(),
       {
         method: "POST",
@@ -115,7 +116,7 @@ const handleRequest = frames(async (ctx) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(await ctx.request.clone().json()),
-      }
+      },
     );
   }
 

@@ -1,7 +1,7 @@
+import { NextRequest, NextResponse } from "next/server";
 import { STORAGE_REGISTRY_ADDRESS } from "@farcaster/core";
 import { TransactionTargetResponse } from "frames.js";
 import { getFrameMessage } from "frames.js/next/server";
-import { NextRequest, NextResponse } from "next/server";
 import {
   Abi,
   createPublicClient,
@@ -10,10 +10,11 @@ import {
   http,
 } from "viem";
 import { optimism } from "viem/chains";
+
 import { storageRegistryABI } from "./contracts/storage-registry";
 
 export async function POST(
-  req: NextRequest
+  req: NextRequest,
 ): Promise<NextResponse<TransactionTargetResponse>> {
   const json = await req.json();
 

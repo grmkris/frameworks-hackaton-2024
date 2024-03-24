@@ -1,16 +1,17 @@
+import Link from "next/link";
+import { getTokenUrl } from "frames.js";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
   FrameInput,
   FrameReducer,
-  NextServerPageProps,
-  getPreviousFrame,
-  useFramesReducer,
   getFrameMessage,
+  getPreviousFrame,
+  NextServerPageProps,
+  useFramesReducer,
 } from "frames.js/next/server";
-import Link from "next/link";
-import { getTokenUrl } from "frames.js";
+
 import { createDebugUrl } from "../../debug";
 import { currentURL } from "../../utils";
 
@@ -47,7 +48,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
   const [state, dispatch] = useFramesReducer<State>(
     reducer,
     initialState,
-    previousFrame
+    previousFrame,
   );
 
   // Here: do a server side side effect either sync or async (using await), such as minting an NFT if you want.

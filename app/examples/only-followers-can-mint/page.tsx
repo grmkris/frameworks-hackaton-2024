@@ -1,17 +1,18 @@
+import Link from "next/link";
+import { getTokenUrl } from "frames.js";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
   FrameReducer,
-  NextServerPageProps,
   getFrameMessage,
   getPreviousFrame,
+  NextServerPageProps,
   useFramesReducer,
 } from "frames.js/next/server";
-import Link from "next/link";
-import { getTokenUrl } from "frames.js";
 import { zora } from "viem/chains";
-import { DEFAULT_DEBUGGER_HUB_URL, createDebugUrl } from "../../debug";
+
+import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../../debug";
 import { currentURL } from "../../utils";
 
 type State =
@@ -57,7 +58,7 @@ export default async function Home({
   const [state, dispatch] = useFramesReducer<State>(
     reducer,
     initialState,
-    previousFrame
+    previousFrame,
   );
 
   // Here: do a server side side effect either sync or async (using await), such as minting an NFT if you want.

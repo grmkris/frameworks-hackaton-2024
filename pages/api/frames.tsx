@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { createFrames, Button } from "frames.js/next/pages-router";
+import { Button, createFrames } from "frames.js/next/pages-router";
 
 const frames = createFrames({
   basePath: "/api/frames",

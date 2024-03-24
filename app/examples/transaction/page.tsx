@@ -1,16 +1,17 @@
+import Link from "next/link";
 import {
   FrameButton,
   FrameContainer,
   FrameImage,
   FrameReducer,
-  NextServerPageProps,
   getFrameMessage,
   getPreviousFrame,
+  NextServerPageProps,
   useFramesReducer,
 } from "frames.js/next/server";
-import Link from "next/link";
+
+import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../../debug";
 import { currentURL } from "../../utils";
-import { DEFAULT_DEBUGGER_HUB_URL, createDebugUrl } from "../../debug";
 
 type State = {
   pageIndex: number;

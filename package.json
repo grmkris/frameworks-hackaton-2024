@@ -12,7 +12,8 @@
     "update-debugger": "npx degit github:framesjs/frames.js/examples/framesjs-starter/app/debug#main app/debug --force",
     "update-framesjs": "yarn upgrade frames.js@latest && yarn run update-debugger",
     "generate-migration": "yarn drizzle-kit generate:pg",
-    "db:migrate": "tsx ./migrate.ts"
+    "db:migrate": "tsx ./migrate.ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@farcaster/core": "^0.14.3",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@frames.js/debugger": "^0.1.9",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
@@ -46,7 +48,9 @@
     "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"

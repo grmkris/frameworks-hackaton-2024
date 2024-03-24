@@ -1,7 +1,8 @@
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { fetchMetadata, metadataToMetaTags } from "frames.js/next/pages-router";
 import Link from "next/link";
+import { fetchMetadata, metadataToMetaTags } from "frames.js/next/pages-router";
+
 import { createDebugUrl } from "../../../app/debug";
 
 export const getServerSideProps = async function getServerSideProps() {
@@ -10,8 +11,8 @@ export const getServerSideProps = async function getServerSideProps() {
       metadata: await fetchMetadata(
         new URL(
           "/api/frames",
-          process.env.VERCEL_URL || "http://localhost:3000"
-        )
+          process.env.VERCEL_URL || "http://localhost:3000",
+        ),
       ),
     },
   };
