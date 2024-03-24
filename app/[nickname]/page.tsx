@@ -1,19 +1,9 @@
-import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { eq } from "drizzle-orm";
-import {
-  FrameButton,
-  FrameContainer,
-  FrameImage,
-  FrameReducer,
-  getFrameMessage,
-  getPreviousFrame,
-  NextServerPageProps,
-  useFramesReducer,
-} from "frames.js/next/server";
+"use client";
 
-import { User, UserTable } from "../../schema";
-import { db } from "../api/user/route";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FrameButton, FrameContainer, FrameImage } from "frames.js/next/server";
+
 import CustomLink, { CustomLinkProps } from "../components/CustomLink";
 import Footer from "../components/Footer";
 import { UserProfile } from "../components/UserProfile";
@@ -49,49 +39,15 @@ const mockLinkData: CustomLinkProps[] = [
   },
 ];
 
-type State = {};
-
-const initialState: State = {};
-
-const reducer: FrameReducer<State> = (state, action) => {
-  return {};
-};
-
-export default async function Home({ searchParams }: NextServerPageProps) {
-  const previousFrame = getPreviousFrame(searchParams);
-
-  const frameMessage = await getFrameMessage(previousFrame.postBody, {
-    hubHttpUrl: DEFAULT_DEBUGGER_HUB_URL,
-  });
-
-  if (frameMessage && !frameMessage?.isValid) {
-    throw new Error("Invalid frame payload");
-  }
-
-  const [state, dispatch] = useFramesReducer<State>(
-    reducer,
-    initialState,
-    previousFrame,
-  );
-
-  // Here: do a server side side effect either sync or async (using await), such as minting an NFT if you want.
-  // example: load the users credentials & check they have an NFT
-  console.log("info: state is:", state);
-
-  if (!searchParams?.nickname) throw new Error("No nickname provided");
-
-  const res = await db.query.UserTable.findFirst({
-    where: eq(UserTable.name, searchParams.nickname as string),
-    with: {
-      links: true,
-    },
-  });
+export default function UserDetail() {
+  const searchParams = useSearchParams();
+  const search = searchParams?.get("nickname") ?? "";
 
   return (
-    <div className="bg-zuriBg min-h-screen flex flex-col justify-start items-center gap-8 sm:gap-14 relative font-contact">
+    <div className="min-h-screen flex flex-col justify-start items-center relative">
       <UserProfile
         user={{
-          nickname: "MrRaccxxn",
+          nickname: search,
         }}
       />
       <div className="flex flex-col justify-center items-center gap-6 w-full px-4 sm:px-12 lg:px-36 pb-40">

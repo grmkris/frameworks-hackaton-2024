@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 import { Privy } from "./components/Privy";
 import { TanstackQueryProvider } from "./components/TanstackQueryProvider";
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ToastContainer />
         <TanstackQueryProvider>
           <Privy>{children}</Privy>
         </TanstackQueryProvider>

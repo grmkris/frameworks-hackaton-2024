@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
         links: true,
       },
     });
+
     return Response.json({ res });
   }
 
@@ -42,6 +43,7 @@ export async function GET(request: NextRequest) {
         links: true,
       },
     });
+
     return Response.json({ res });
   }
 }
