@@ -1,40 +1,34 @@
-# Frames.js Starter Kit
+<h1 align="center">LinkHub</h1>
 
-This is a boilerplate repo to get started quickly with `frames.js`
+<p align="center">
+  <strong>A powerful tool for frame builders, designed to simplify profile redirection and enable direct user donations.</strong>
+</p>
 
-## Quickstart
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-v11.1.0-blue" alt="Next.js Version">
+  <img src="https://img.shields.io/badge/frame.js-v2.0.0-green" alt="frame.js Version">
+  <img src="https://img.shields.io/badge/Privy-v1.5.3-yellow" alt="Privy Version">
+  <img src="https://img.shields.io/badge/License-MIT-orange" alt="License">
+</p>
 
-If running from the frames.js repository itself:
+## Key Features
+- **Frame-Based Redirection**: Seamlessly redirect users to different profiles using frames.
+- **QR Code Integration**: Enable direct donations to users via QR codes.
+- **User-Friendly Interface**: Intuitive design for easy navigation and link management.
 
-- Run `yarn` from the repository root
-- Run `cd examples/framesjs-starter`
+## Technologies Used
+- [Next.js](https://nextjs.org/)
+- [frame.js](https://github.com/example/frame.js)
+- [Privy](https://privy.com/)
 
-1. Install dependencies `yarn install`
+## Getting Started
+1. Clone the repository.
+2. Install dependencies with `yarn install`.
+3. Configure your env in `.env`.
+4. Run the application with `yarn dev`.
 
-2. Run the dev server `yarn dev`
+## Contributing
+We welcome contributions from the community to enhance LinkHub. Please fork the repository and submit pull requests with your improvements.
 
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-4. Edit `app/page.tsx`
-
-5. Visit [http://localhost:3000/debug](http://localhost:3000/debug) to debug your frame.
-
-6. (Optional) To use a real signer (costs warps), copy `.env.sample` to `.env` and fill in the env variables following the comments provided
-
-## Docs, Questions and Help
-
-- [Frames.js Documentation](https://framesjs.org)
-- [Awesome frames](https://github.com/davidfurlong/awesome-frames?tab=readme-ov-file)
-- Join the [/frames-dev](https://warpcast.com/~/channel/frames-devs) channel on Farcaster to ask questions
-
-## If you get stuck or have feedback, [Message @df please!](https://warpcast.com/df)
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy
-
-```bash
-vercel
-```
-
-more deployment links coming soon, PRs welcome!
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
