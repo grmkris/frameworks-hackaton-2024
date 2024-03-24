@@ -14,8 +14,10 @@ import { UserTable } from "../../schema";
 import { db } from "../api/user/route";
 import CustomLink, { CustomLinkProps } from "../components/CustomLink";
 import Footer from "../components/Footer";
-import { UserProfile } from "../components/UserProfile";
+import { Spinner } from "../components/Spinner";
 import { createDebugUrl, DEFAULT_DEBUGGER_HUB_URL } from "../debug";
+import { useUser } from "../hooks/user.hook";
+import { UserProfileScreen } from "../screens/UserProfile";
 
 export type UserType = {
   nickname: string;
@@ -99,18 +101,8 @@ export default async function UserDetail({
   // @ts-ignore
   return (
     <div className="min-h-screen flex flex-col justify-start items-center relative">
-      <UserProfile
-        user={{
-          nickname: search,
-        }}
-      />
-      <div className="flex flex-col justify-center items-center gap-6 w-full px-4 sm:px-12 lg:px-36 pb-40">
-        {mockLinkData.map((link) => (
-          <CustomLink key={link.name} link={link} />
-        ))}
-      </div>
-      <Footer />
-      <Link href={createDebugUrl("/[nickname]/page")}>Debug</Link>
+      <UserProfileScreen nickname={search} />
+      {/* <Link href={createDebugUrl("/[nickname]/page")}>Debug</Link> */}
       <FrameContainer
         pathname={`/${search}`}
         postUrl="/frames"
