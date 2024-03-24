@@ -70,54 +70,6 @@ export default async function Home({ searchParams }: NextServerPageProps) {
       </Link>
       <ConnectWallet />
       <LinkManager />
-      <FrameContainer
-        postUrl="/frames"
-        pathname="/"
-        state={state}
-        previousFrame={previousFrame}
-      >
-        {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage aspectRatio="1.91:1">
-          <div tw="w-full h-full bg-slate-700 text-white justify-center items-center flex flex-col">
-            <div tw="flex flex-row">
-              {frameMessage?.inputText ? frameMessage.inputText : "Hello world"}
-            </div>
-            {frameMessage && (
-              <div tw="flex flex-col">
-                <div tw="flex">
-                  Requester is @{frameMessage.requesterUserData?.username}{" "}
-                </div>
-                <div tw="flex">
-                  Requester follows caster:{" "}
-                  {frameMessage.requesterFollowsCaster ? "true" : "false"}
-                </div>
-                <div tw="flex">
-                  Caster follows requester:{" "}
-                  {frameMessage.casterFollowsRequester ? "true" : "false"}
-                </div>
-                <div tw="flex">
-                  Requester liked cast:{" "}
-                  {frameMessage.likedCast ? "true" : "false"}
-                </div>
-                <div tw="flex">
-                  Requester recasted cast:{" "}
-                  {frameMessage.recastedCast ? "true" : "false"}
-                </div>
-              </div>
-            )}
-          </div>
-        </FrameImage>
-        <FrameInput text="put some text here" />
-        <FrameButton>
-          {state?.active === "1" ? "Active" : "Inactive"}
-        </FrameButton>
-        <FrameButton>
-          {state?.active === "2" ? "Active" : "Inactive"}
-        </FrameButton>
-        <FrameButton action="link" target={`https://www.google.com`}>
-          External
-        </FrameButton>
-      </FrameContainer>
     </div>
   );
 }
