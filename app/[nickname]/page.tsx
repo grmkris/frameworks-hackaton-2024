@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -58,9 +56,12 @@ const reducer: FrameReducer<State> = (state, action) => {
   return {};
 };
 
-export default async function UserDetail() {
-  const searchParams = useSearchParams();
-  const search = searchParams?.get("nickname") ?? "";
+export default async function UserDetail({
+  params,
+}: {
+  params: { nickname: string };
+}) {
+  const search = params.nickname;
 
   const previousFrame = getPreviousFrame(search);
 
@@ -120,21 +121,27 @@ export default async function UserDetail() {
                 flexDirection: "column",
               }}
             >
-              Say GM
+              <img
+                alt="Vercel"
+                height={400}
+                src="https://picsum.photos/200/300"
+                width={600}
+              />
+              This is a user profile page of {search}
             </div>
           )}
         </FrameImage>
         <FrameButton action={"link"} target={"/"}>
-          Say GM
+          Twitter
         </FrameButton>
         <FrameButton action={"link"} target={"/"}>
-          Say GM
+          Facebook
         </FrameButton>
         <FrameButton action={"link"} target={"/"}>
-          Say GM
+          Instagram
         </FrameButton>
         <FrameButton action={"link"} target={"/"}>
-          Say GM
+          LinkedIn
         </FrameButton>
       </FrameContainer>
     </div>
