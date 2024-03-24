@@ -3,6 +3,8 @@
 import { usePrivy } from "@privy-io/react-auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { User } from "../../schema";
+
 export type Link = {
   id: number;
   url: string;
@@ -38,11 +40,11 @@ export const LinkManager = () => {
 
 export const Links = (props: { connectedWallet: string }) => {
   const links = useQuery<{
-    res: Link[];
+    res: User;
   }>({
     queryKey: ["links", props.connectedWallet],
     queryFn: async () => {
-      return fetch(`/api/links?owner=${props.connectedWallet}`).then((res) =>
+      return fetch(`/api/user?name=${props.connectedWallet}`).then((res) =>
         res.json(),
       );
     },
@@ -51,7 +53,7 @@ export const Links = (props: { connectedWallet: string }) => {
     <div>
       <h1>Links</h1>
       <ul>
-        {links.data?.res.map((link) => (
+        {links.data?.res.links?.map((link) => (
           <li key={link.id}>
             <a href={link.url}>{link.title}</a>
           </li>
@@ -72,7 +74,7 @@ export const CreateLink = (props: { connectedWallet: string }) => {
     const image = "TODO";
     const owner = props.connectedWallet;
 
-    const res = await fetch("/api/links", {
+    const res = await fetch("/api/link", {
       method: "POST",
       body: JSON.stringify({ url, title, description, image, owner }),
     }).then((res) => res.json());

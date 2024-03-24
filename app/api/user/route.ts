@@ -17,17 +17,33 @@ export const db = drizzle(sql, { schema: schema });
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const name = searchParams.get("name");
-  if (!name) {
-    return Response.json({ error: "No owner provided" }, { status: 400 });
+  const wallet = searchParams.get("wallet");
+  if (!name || !wallet) {
+    return Response.json(
+      { error: "No wallet or name provided" },
+      { status: 400 },
+    );
   }
-  const res = await db.query.UserTable.findMany({
-    where: eq(UserTable.name, name),
-    with: {
-      links: true,
-    },
-  });
 
-  return Response.json({ res });
+  if (name) {
+    const res = await db.query.UserTable.findMany({
+      where: eq(UserTable.name, name),
+      with: {
+        links: true,
+      },
+    });
+    return Response.json({ res });
+  }
+
+  if (wallet) {
+    const res = await db.query.UserTable.findMany({
+      where: eq(UserTable.wallet, wallet),
+      with: {
+        links: true,
+      },
+    });
+    return Response.json({ res });
+  }
 }
 
 /**
