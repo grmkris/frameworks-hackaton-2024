@@ -16,7 +16,7 @@ export const db = drizzle(sql, { schema: schema });
  */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  console.log("qweqweq", searchParams);
+
   const name = searchParams.get("name");
   const wallet = searchParams.get("wallet");
   if (!name && !wallet) {
