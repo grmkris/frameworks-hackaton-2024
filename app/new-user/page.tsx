@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaSave } from "react-icons/fa";
 
 import { Link, User } from "../../schema";
+import { ConnectWallet } from "../components/ConnectWallet";
 import { UserProfile } from "../components/UserProfile";
 import { useUser } from "../hooks/user.hook";
 import { LinkInput } from "./LinkInput";
@@ -71,34 +72,38 @@ const NewUserPage = () => {
   // };
 
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="flex flex-col justify-center"
-    >
-      <div className="flex flex-col justify-start items-center relative gap-4">
-        <UserProfile
-          isEditing
-          user={{
-            nickname: user?.farcaster?.username ?? userData.data?.name,
-          }}
-          form={form}
-        />
-        <LinkInput form={form} />
-        {/* <div className="flex flex-col justify-center items-center gap-6 w-full px-4 sm:px-12 lg:px-36 pb-40">
+    <div>
+      <ConnectWallet />
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col justify-center"
+      >
+        <div className="flex flex-col justify-start items-center relative gap-4">
+          <UserProfile
+            isEditing
+            user={{
+              nickname: user?.farcaster?.displayName ?? userData.data?.name,
+              image: user?.farcaster?.pfp,
+            }}
+            form={form}
+          />
+          <LinkInput form={form} />
+          {/* <div className="flex flex-col justify-center items-center gap-6 w-full px-4 sm:px-12 lg:px-36 pb-40">
         {mockLinkData.map((link) => (
           <CustomLink key={link.name} link={link} />
         ))}
       </div>
       <Footer /> */}
-      </div>
-      <Button
-        type="submit"
-        className="flex flex-row gap-1 bg-gray-800 text-white p-2 rounded-md px-8 w-fit my-2 self-center"
-      >
-        <FaSave color="#ffffff" />
-        <p>Save</p>
-      </Button>
-    </form>
+        </div>
+        <Button
+          type="submit"
+          className="flex flex-row gap-1 bg-gray-800 text-white p-2 rounded-md px-8 w-fit my-2 self-center"
+        >
+          <FaSave color="#ffffff" />
+          <p>Save</p>
+        </Button>
+      </form>
+    </div>
   );
 };
 
