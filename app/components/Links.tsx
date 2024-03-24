@@ -38,13 +38,13 @@ export const LinkManager = () => {
   }
 };
 
-export const Links = (props: { connectedWallet: string }) => {
+export const Links = (props: { connectedWallet?: string; name?: string }) => {
   const links = useQuery<{
     res: User;
   }>({
     queryKey: ["links", props.connectedWallet],
     queryFn: async () => {
-      return fetch(`/api/user?name=${props.connectedWallet}`).then((res) =>
+      return fetch(`/api/user?wallet=${props.connectedWallet}`).then((res) =>
         res.json(),
       );
     },

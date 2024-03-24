@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const name = searchParams.get("name");
   const wallet = searchParams.get("wallet");
-  if (!name || !wallet) {
+  if (!name && !wallet) {
     return Response.json(
       { error: "No wallet or name provided" },
       { status: 400 },
