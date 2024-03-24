@@ -102,7 +102,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
       <Footer />
       <Link href={createDebugUrl("/[nickname]/page")}>Debug</Link>
       <FrameContainer
-        pathname="/"
+        pathname={`/${searchParams.nickname}`}
         postUrl="/frames"
         state={state}
         previousFrame={previousFrame}
