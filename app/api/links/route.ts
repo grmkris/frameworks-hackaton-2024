@@ -1,8 +1,8 @@
 import {neon} from "@neondatabase/serverless";
 import {drizzle} from "drizzle-orm/neon-http";
-import * as schema from "../../schema";
+import * as schema from "../../../schema";
 import {eq} from "drizzle-orm";
-import {LinksTable} from "../../schema";
+import {LinksTable} from "../../../schema";
 import {NextRequest} from "next/server";
 
 const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
